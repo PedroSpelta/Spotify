@@ -12,7 +12,7 @@ function Sidebar() {
   console.log(session);
   return (
     <div>
-      <div className="text-gray-500 p-5 text-sm border-r border-gray-900 overflow-y-scroll h-screen">
+      <div className="text-gray-500 p-5 text-sm border-r border-gray-900 overflow-y-scroll h-screen scrollbar-hide">
         <div className="space-y-4">
         <button className="flex space-x-2 items-center hover:text-white" onClick={signOut}>
             <p>Sign out</p>
