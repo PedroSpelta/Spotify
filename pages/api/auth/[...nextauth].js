@@ -25,7 +25,7 @@ async function refreshAccessToken(token) {
     console.log(error);
     return {
       ...token,
-      error: "refressacesstokenerror"
+      error: "RefreshAccessTokenError"
     }
   }
 }
