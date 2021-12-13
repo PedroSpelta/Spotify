@@ -4,7 +4,7 @@ import {
   SearchIcon,
   LibraryIcon,
   PlusCircleIcon,
-} from "@heroicons/react/outline";
+} from "@heroicons/react/solid";
 import { useSession, signOut } from "next-auth/react";
 import useSpotify from "../hooks/useSpotify";
 import { useRecoilState } from "recoil";
@@ -26,7 +26,7 @@ function Sidebar() {
 
   return (
     <div>
-      <div className="text-gray-500 p-5 text-sm border-r border-gray-900 overflow-y-scroll h-screen scrollbar-hide">
+      <div className="text-gray-500 p-5 text-sm border-r border-gray-900 overflow-y-scroll h-screen scrollbar-hide sm:max-w-[12rem] lg:max-w-[15rem] hidden md:inline-flex">
         <div className="space-y-4">
           <button className="flex space-x-2 items-center hover:text-white" onClick={signOut}>
             <p>Sign out</p>
