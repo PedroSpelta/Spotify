@@ -4,73 +4,16 @@ import { BiSkipPrevious, BiSkipNext, BiPlay, BiStop } from "react-icons/bi";
 import { debounce } from "lodash";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
+import useWebPlayback from "../hooks/useWebPlayback";
+import {  useRecoilValue } from "recoil";
+import { currentTrack, isPaused } from "../atoms/songAtom";
 
-const track = {
-  name: "",
-  album: {
-    images: [{ url: "" }],
-  },
-  artists: [{ name: "" }],
-};
-
-function WebPlayback(props) {
-  const [player, setPlayer] = useState(undefined);
+function WebPlayback() {
   const spotifyApi = useSpotify();
-  const [is_paused, setPaused] = useState(false);
-  const [is_active, setActive] = useState(false);
-  const [current_track, setTrack] = useState(track);
+  const is_paused = useRecoilValue(isPaused)
+  const current_track = useRecoilValue(currentTrack);
   const [volume, setVolume] = useState(50);
-
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://sdk.scdn.co/spotify-player.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    window.onSpotifyWebPlaybackSDKReady = () => {
-      const token = spotifyApi.getAccessToken();
-      console.log(token);
-      const player = new window.Spotify.Player({
-        name: "Web Playback SDK",
-        getOAuthToken: (cb) => {
-          cb(token);
-        },
-        volume: 0.5,
-      });
-      setPlayer(player);
-      player.addListener("ready", ({ device_id }) => {
-        console.log("Ready with Device ID", device_id);
-        const deviceIds = [device_id];
-        spotifyApi.transferMyPlayback(deviceIds).then(
-          function () {
-            console.log("Transfering playback to " + deviceIds);
-          },
-          function (err) {
-            //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
-            console.log("Something went wrong!", err);
-          }
-        );
-      });
-
-      player.addListener("not_ready", ({ device_id }) => {
-        console.log("Device ID has gone offline", device_id);
-      });
-
-      player.addListener("player_state_changed", (state) => {
-        if (!state) {
-          return;
-        }
-        setTrack(state.track_window.current_track);
-        setPaused(state.paused);
-
-        player.getCurrentState().then((state) => {
-          !state ? setActive(false) : setActive(true);
-        });
-      });
-
-      player.connect();
-    };
-  }, []);
+  const player = useWebPlayback();
 
   const debounceVolume = useCallback(
     debounce((volume) => {
