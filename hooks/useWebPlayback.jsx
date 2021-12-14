@@ -19,7 +19,6 @@ function useWebPlayback() {
 
     window.onSpotifyWebPlaybackSDKReady = () => {
       const token = spotifyApi.getAccessToken();
-      console.log(token);
       const player = new window.Spotify.Player({
         name: "Web Playback SDK",
         getOAuthToken: (cb) => {
