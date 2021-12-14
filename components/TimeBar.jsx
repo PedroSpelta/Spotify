@@ -2,62 +2,96 @@ import { debounce } from "lodash";
 import React, { useState } from "react";
 import { useCallback, useEffect } from "react/cjs/react.development";
 import { useRecoilValue } from "recoil";
-import { currentTrack } from "../atoms/songAtom";
+import { currentTrack, isPaused } from "../atoms/songAtom";
 import Slider from "rc-slider";
-import useWebPlayback from "../hooks/useWebPlayback";
 import { millisToMinutesAndSeconds } from "../lib/time";
 
-function TimeBar() {
+function TimeBar({ player }) {
   const { duration_ms, uri } = useRecoilValue(currentTrack);
   const [inputDuration, setInputDuration] = useState(0);
-  const player = useWebPlayback();
-  // console.log('timebar', player);
+  const is_paused = useRecoilValue(isPaused);
 
   const [time, setTime] = useState(0);
   const [timer, setTimer] = useState(undefined);
-  let times = 0;
 
   const stopTimer = (t) => {
+    console.log("stop");
     clearInterval(t);
+    setTimer(undefined);
   };
 
-  const startTimer = () => {
-    console.log("timer start");
-    setTimer(
-      setInterval(() => {
-        times += 1;
-        setTime(times);
-        setInputDuration(times*1000);
-      }, 1000)
-    );
+  const resetTimer = () => {
+    if (!is_paused) {
+      console.log("reset timer not paused");
+      clearInterval(timer);
+      let times = 0;
+      setTimer(
+        setInterval(() => {
+          setTime(times);
+          setInputDuration(times * 1000);
+          times += 1;
+        }, 1000)
+      );
+    }
+    // if (is_paused) {
+    //   console.log("reset timer paused");
+    //   clearInterval(timer);
+    //   setTime(0);
+    //   setInputDuration(0);
+    // }
+  };
+
+  const resumeTimer = () => {
+    if (!timer) {
+      console.log("resume");
+      let times = time;
+      setTimer(
+        setInterval(() => {
+          setTime(times);
+          setInputDuration(times * 1000);
+          times += 1;
+        }, 1000)
+      );
+    }
   };
 
   useEffect(() => {
-    console.log("reset timer");
-    // stopTimer(timer);
-    // startTimer();
-    // setInputDuration(0);
+    resetTimer();
   }, [uri]);
 
-  // const debouceDuration = useCallback(
-  //   debounce((inputDuration, player) => {
-  //     if (player) {
-  //       console.log(player);
-  //       console.log(millisToMinutesAndSeconds(inputDuration));
-  //       player.seek(inputDuration);
+  useEffect(() => {
+    if (is_paused && timer) {
+      stopTimer(timer);
+    } else if (!is_paused && !timer) {
+      resumeTimer();
+    }
+  }, [is_paused]);
+
+  // useEffect(() => {
+  //   stopTimer(timer);
+  //   if (!isPaused) {
+  //     if (!timer) {
+  //       console.log('notimer');
   //     }
-  //   }, 500),
-  //   []
-  // );
+  //   }
+  // }, [uri, timer]);
+
+  const debouceDuration = useCallback(
+    debounce((inputDuration, player) => {
+      // if (player) {
+      //   player.seek(inputDuration);
+      // }
+    }, 500),
+    []
+  );
 
   useEffect(() => {
-    // debouceDuration(inputDuration, player);
-    console.log('inputduration', inputDuration);
+    debouceDuration(inputDuration, player);
   }, [inputDuration]);
 
   return (
     <>
-      {millisToMinutesAndSeconds(time*1000)}
+      {millisToMinutesAndSeconds(time * 1000)}
       <div className="w-full">
         {/* <input type="range" min={0} max={100} onChange={(e) => {setVolume(Number(e.target.value))}}/> */}
         <Slider

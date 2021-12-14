@@ -24,7 +24,7 @@ export const currentTrack = atom({
 
 export const isPaused = atom({
   key: "isPaused",
-  default: false,
+  default: true,
 })
 
 export const isActive = atom({

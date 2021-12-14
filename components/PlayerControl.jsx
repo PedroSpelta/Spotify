@@ -8,7 +8,6 @@ import TimeBar from './TimeBar';
 function PlayerControl() {
   const is_paused = useRecoilValue(isPaused);
   const player = useWebPlayback();
-  console.log('player', player);
 
   return (
     <div className='flex items-center justify-center flex-col'>
@@ -40,7 +39,7 @@ function PlayerControl() {
             onClick={() => player.nextTrack()}
           />
         </div>
-        {/* <TimeBar /> */}
+        {/* <TimeBar player = {player}/> */}
       </div>
   )
 }
