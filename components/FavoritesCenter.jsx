@@ -31,10 +31,11 @@ function FavoritesCenter() {
   }, [spotifyApi]);
 
   return (
-    <div className="flex h-screen items-center justify-center">
-      <div className="flex flex-col flex-wrap justify-center px-16">
+    <div className="relative h-screen flex-grow">
+      <div className="h-80 flex bg-gradient-to-b from-green-600 to-black "></div>
+      <div className="flex flex-col flex-wrap px-16 mt-[-100px]">
         <p className="text-3xl text-white teste">Músicas mais tocadas</p>
-        <div className="flex justify-center items-center teste gap-5">
+        <div className="flex items-center teste gap-5">
           {topTracks.map((track, i) => {
             return (
               <div
@@ -53,7 +54,7 @@ function FavoritesCenter() {
           })}
         </div>
         <p className="text-3xl text-white teste pt-20">Artistas mais tocados</p>
-        <div className="flex justify-center items-center teste gap-5">
+        <div className="flex items-center teste gap-5">
           {topArtists.map((artist, i) => {
             return (
               <div
