@@ -1,16 +1,11 @@
 import { getSession } from "next-auth/react";
 import React from "react";
-import Center from "../../components/Center";
 import FavoritesCenter from "../../components/FavoritesCenter";
 import Sidebar from "../../components/Sidebar";
-import WebPlayback from "../../components/WebPlayback";
-import useSpotify from "../../hooks/useSpotify";
 
 export default function index() {
-  const spotifyApi = useSpotify();
-  
   return (
-    <div className="bg-black h-screen overflow-hidden">
+    <div className="bg-black h-screen">
       <main className="flex">
         <Sidebar />
         <FavoritesCenter />
