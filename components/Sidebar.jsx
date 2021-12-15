@@ -39,10 +39,12 @@ function Sidebar() {
               <p>Início</p>
             </button>
           </Link>
+          <Link href={'/search'} >
           <button className="flex space-x-2 items-center hover:text-white duration-300  font-semibold">
             <SearchIcon className="h-5 w-5" />
             <p>Procurar</p>
           </button>
+          </Link>
           <button className="flex space-x-2 items-center hover:text-white duration-300  font-semibold">
             <LibraryIcon className="h-5 w-5" />
             <p>Biblioteca</p>
