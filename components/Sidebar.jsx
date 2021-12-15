@@ -28,7 +28,7 @@ function Sidebar() {
 
   return (
     <div>
-      <div className="text-gray-300 p-5 text-sm border-r border-gray-900 overflow-y-scroll h-screen scrollbar-hide sm:max-w-[12rem] lg:max-w-[15rem] hidden md:inline-flex">
+      <div className="text-gray-300 bg-black p-5 text-sm border-r border-gray-900 overflow-y-scroll h-screen scrollbar-hide md:min-w-[15rem] sm:max-w-[12rem] lg:max-w-[15rem] hidden md:inline-flex">
         <div className="space-y-4">
           <div className="mb-10">
             <SpotifyLogo />

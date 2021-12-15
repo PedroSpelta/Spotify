@@ -40,10 +40,10 @@ function Center() {
   }, [playlistId]);
 
   return (
-    <div className="relative flex-grow h-screen overflow-y-scroll scrollbar-hide">
+    <div className="relative flex-grow h-screen overflow-y-scroll scrollbar-hide bg-[#141414]">
       <header className="absolute top-5 right-8">
         <div
-          className="flex text-white items-center bg-black space-x-3 opacity-90 hover:opacity-80 cursor-pointer rounded-full p-1 pr-2"
+          className="flex text-white items-center bg-[#141414] space-x-3 opacity-90 hover:opacity-80 cursor-pointer rounded-full p-1 pr-2"
           onClick={signOut}
         >
           <img
@@ -56,7 +56,7 @@ function Center() {
         </div>
       </header>
       <section
-        className={`flex items-end space-x-7 bg-gradient-to-b to-black ${color} h-80 text-white p-8`}
+        className={`flex items-end space-x-7 bg-gradient-to-b to-[#141414] ${color} h-80 text-white p-8`}
       >
         <img
           className="w-44 h-44 shadow-2xl"

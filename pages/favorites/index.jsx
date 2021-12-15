@@ -5,7 +5,7 @@ import Sidebar from "../../components/Sidebar";
 
 export default function index() {
   return (
-    <div className="bg-black h-screen">
+    <div className="bg-[#121212] h-screen">
       <main className="flex">
         <Sidebar />
         <FavoritesCenter />

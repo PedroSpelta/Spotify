@@ -32,7 +32,7 @@ function FavoritesCenter() {
 
   return (
     <div className="h-screen w-full overflow-y-scroll scrollbar-hide">
-      <div className="h-80 flex bg-gradient-to-b from-green-600 to-black "></div>
+      <div className="h-80 flex bg-gradient-to-b from-green-600 to-[#121212] "></div>
       <div className="flex flex-col px-16 mt-[-100px]">
         <p className="text-3xl text-white teste">Músicas mais tocadas</p>
         <div className="flex items-center teste gap-5 flex-wrap">
