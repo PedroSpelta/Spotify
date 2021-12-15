@@ -4,10 +4,13 @@ import { useRecoilValue } from 'recoil';
 import { isPaused } from '../atoms/songAtom';
 import { BiSkipPrevious, BiSkipNext, BiPlay, BiStop } from "react-icons/bi";
 import TimeBar from './TimeBar';
+import useSpotify from "../hooks/useSpotify";
 
 function PlayerControl() {
   const is_paused = useRecoilValue(isPaused);
   const player = useWebPlayback();
+  const spotifyApi = useSpotify();
+  // console.log(spotifyApi.getMyRecentlyPlayedTracks());
 
   return (
     <div className='flex items-center justify-center flex-col'>
@@ -36,7 +39,7 @@ function PlayerControl() {
           )}
           <BiSkipNext
             className="w-8 h-8 hover:text-white"
-            onClick={() => player.nextTrack()}
+            onClick={() => {player.nextTrack()}}
           />
         </div>
         {/* <TimeBar player = {player}/> */}
