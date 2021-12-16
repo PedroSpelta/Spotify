@@ -6,6 +6,7 @@ import Song from "../components/Song";
 import Link from "next/link";
 import axios from "axios";
 import Artist from "./Artist";
+import SearchSong from "./SearchSong";
 
 function SearchCenter() {
   const spotifyApi = useSpotify();
@@ -89,7 +90,7 @@ function SearchCenter() {
 
       {foundTracks.map((track, i) => {
         return (
-          <Song
+          <SearchSong
             key={i}
             order={i}
             track={track}
