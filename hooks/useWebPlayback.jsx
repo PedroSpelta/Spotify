@@ -6,14 +6,12 @@ import useSpotify from './useSpotify';
 
 
 function useWebPlayback() {
-  const [ogplayer, setGPlayer] = useRecoilState(webPlayerState);
   const [oplayer, setPlayer] = useState(undefined);
   const spotifyApi = useSpotify();
   const [is_paused, setPaused] = useRecoilState(isPaused);
   const [current_track, setTrack] = useRecoilState(currentTrack);
   const [is_active, setActive] = useRecoilState(isActive);
 
-  
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://sdk.scdn.co/spotify-player.js";
@@ -28,9 +26,10 @@ function useWebPlayback() {
         },
         volume: 0.1,
       });
+      console.log('web',player);
 
       setPlayer(player);
-      
+
       player.addListener("ready", ({ device_id }) => {
         console.log("Ready with Device ID", device_id);
         const deviceIds = [device_id];
@@ -39,7 +38,6 @@ function useWebPlayback() {
             console.log("Transfering playback to " + deviceIds);
           },
           function (err) {
-            //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
             console.log("Something went wrong!", err);
           }
         );

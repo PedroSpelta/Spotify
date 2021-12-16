@@ -1,16 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useWebPlayback from '../hooks/useWebPlayback';
 import { useRecoilValue } from 'recoil';
 import { isPaused } from '../atoms/songAtom';
 import { BiSkipPrevious, BiSkipNext, BiPlay, BiStop } from "react-icons/bi";
 import TimeBar from './TimeBar';
 import useSpotify from "../hooks/useSpotify";
+import { webPlayerState } from '../atoms/playerAtom';
 
-function PlayerControl() {
+function PlayerControl({player}) {
   const is_paused = useRecoilValue(isPaused);
-  const player = useWebPlayback();
+  // const player = useRecoilValue(webPlayerState);
   const spotifyApi = useSpotify();
   // console.log(spotifyApi.getMyRecentlyPlayedTracks());
+
+  useEffect(() => {
+    console.log('player on control', player);
+  }, [player])
 
   return (
     <div className='flex items-center justify-center flex-col'>
@@ -24,21 +29,21 @@ function PlayerControl() {
           />
           {is_paused ? (
             <div
-              className="rounded-full w-10 h-10 bg-white flex justify-center items-center hover:scale-105"
-              onClick={() => player.resume()}
+              className="md:rounded-full w-10 h-10 md:bg-white flex justify-center items-center hover:scale-105"
+              onClick={() => {console.log(player); player.resume()}}
             >
-              <BiPlay className="pl-1 w-8 h-8 text-black" />
+              <BiPlay className="md:pl-1 md:w-8 md:h-8 w-9 h-9 md:text-black text-white" />
             </div>
           ) : (
             <div
-              className="rounded-full w-10 h-10 bg-white flex justify-center items-center hover:scale-105"
+              className="md:rounded-full w-10 h-10 md:bg-white flex justify-center items-center hover:scale-105"
               onClick={() => player.pause()}
             >
-              <BiStop className="w-6 h-6 text-black" />
+              <BiStop className="md:pl-1 md:w-8 md:h-8 w-9 h-9 md:text-black text-white" />
             </div>
           )}
           <BiSkipNext
-            className="w-8 h-8 hover:text-white"
+            className="w-10 h-10 hover:text-white"
             onClick={() => {player.nextTrack()}}
           />
         </div>

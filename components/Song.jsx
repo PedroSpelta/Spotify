@@ -1,7 +1,4 @@
 import React from "react";
-import { useRecoilState } from "recoil";
-import { playlistState } from "../atoms/playlistAtom";
-import useSpotify from "../hooks/useSpotify";
 import { millisToMinutesAndSeconds } from "../lib/time";
 
 function Song({ track, order, onClick }) {
@@ -16,7 +13,7 @@ function Song({ track, order, onClick }) {
         <img src={track.album.images[0].url} alt="" className="h-10 w-10" />
         <div>
           <p className="w-36 lg:w-64 truncate text-white">{track.name}</p>
-          <p className="w-40">{track.artists[0].name}</p>
+          <p className="w-40 truncate">{track.artists[0].name}</p>
         </div>
       </div>
       <div className="flex items-center justify-between ml-auto md:ml-0">
