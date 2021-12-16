@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 import useWebPlayback from '../hooks/useWebPlayback';
 import { useRecoilValue } from 'recoil';
 import { isPaused } from '../atoms/songAtom';
-import { BiSkipPrevious, BiSkipNext, BiPlay, BiStop } from "react-icons/bi";
+import { BiSkipPrevious, BiSkipNext, BiPlay, BiStop, BiPause } from "react-icons/bi";
+import { IoIosPause } from 'react-icons/io'
 import TimeBar from './TimeBar';
 import useSpotify from "../hooks/useSpotify";
 import { webPlayerState } from '../atoms/playerAtom';
@@ -29,17 +30,17 @@ function PlayerControl({player}) {
           />
           {is_paused ? (
             <div
-              className="md:rounded-full w-10 h-10 md:bg-white flex justify-center items-center hover:scale-105"
+              className="md:rounded-full w-9 h-9 md:bg-white flex justify-center items-center hover:scale-105"
               onClick={() => {console.log(player); player.resume()}}
             >
               <BiPlay className="md:pl-1 md:w-8 md:h-8 w-9 h-9 md:text-black " />
             </div>
           ) : (
             <div
-              className="md:rounded-full w-10 h-10 md:bg-white flex justify-center items-center hover:scale-105"
+              className="md:rounded-full w-9 h-9 md:bg-white flex justify-center items-center hover:scale-105"
               onClick={() => player.pause()}
             >
-              <BiStop className="md:pl-1 md:w-8 md:h-8 w-9 h-9 md:text-black" />
+              <IoIosPause className="md:w-6 md:h-6 w-9 h-9 md:text-black" />
             </div>
           )}
           <BiSkipNext

@@ -13,7 +13,6 @@ function SearchCenter() {
   const [foundTracks, setFoundTracks] = useState([]);
   const [foundArtists, setFoundArtists] = useState([]);
 
-
   const onClick = (track) => {
     console.log(track);
     spotifyApi.play({
@@ -62,11 +61,11 @@ function SearchCenter() {
   }, [searchInput]);
 
   return (
-    <div className="h-screen w-full overflow-y-scroll scrollbar-hide">
+    <div className="h-screen w-full overflow-y-scroll scrollbar-hide ml-7">
       <Link className="hidden" href={"/"}>
         <p className="md:hidden text-white">voltar</p>
       </Link>
-      <div className="flex justify-center md:justify-start md:ml-5">
+      <div className="flex justify-center md:justify-start ml-[-28px] md:ml-0">
         <input
           type="text"
           placeholder="Procurar uma música"
@@ -81,7 +80,12 @@ function SearchCenter() {
             backgroundPositionY: "center",
           }}
         ></input>
+
       </div>
+      
+      {foundArtists.length > 0 ? (
+        <p className="font-bold text-white text-2xl my-7">Músicas</p>
+      ) : null}
 
       {foundTracks.map((track, i) => {
         return (
@@ -98,12 +102,13 @@ function SearchCenter() {
           />
         );
       })}
-      <div className="flex gap-5">
-      {foundArtists.map((artist, i) => {
-        return (
-          <Artist artist={artist} key={i} />
-        );
-      })}
+      {foundArtists.length > 0 ? (
+        <p className="font-bold text-white text-2xl my-7 ">Artistas</p>
+      ) : null}
+      <div className="flex gap-7 overflow-hidden flex-wrap">
+        {foundArtists.map((artist, i) => {
+          return <Artist artist={artist} key={i} />;
+        })}
       </div>
     </div>
   );
