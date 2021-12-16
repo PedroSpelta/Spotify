@@ -5,11 +5,14 @@ import useSpotify from "../hooks/useSpotify";
 import Song from "../components/Song";
 import Link from "next/link";
 import axios from "axios";
+import Artist from "./Artist";
 
 function SearchCenter() {
   const spotifyApi = useSpotify();
   const [searchInput, setSearchInput] = useState("");
   const [foundTracks, setFoundTracks] = useState([]);
+  const [foundArtists, setFoundArtists] = useState([]);
+
 
   const onClick = (track) => {
     console.log(track);
@@ -19,17 +22,17 @@ function SearchCenter() {
   };
 
   const onClickPlayback = (track) => {
-    console.log('playback add', track);
+    console.log("playback add", track);
     const { uri } = track;
     const token = spotifyApi.getAccessToken();
     axios({
-      method:"post",
-      url:`https://api.spotify.com/v1/me/player/queue?uri=${uri}`,
+      method: "post",
+      url: `https://api.spotify.com/v1/me/player/queue?uri=${uri}`,
       headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-  }
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
 
   const searchInputDebounce = useCallback(
     debounce((searchInput) => {
@@ -38,8 +41,15 @@ function SearchCenter() {
           .searchTracks(searchInput, { limit: 5 })
           .then((data) => {
             const { items } = data.body.tracks;
-            console.log(items);
             setFoundTracks(items);
+          })
+          .catch(() => {});
+        spotifyApi
+          .searchArtists(searchInput, { limit: 5 })
+          .then((data) => {
+            const { items } = data.body.artists;
+            console.log(items);
+            setFoundArtists(items);
           })
           .catch(() => {});
       }
@@ -88,6 +98,13 @@ function SearchCenter() {
           />
         );
       })}
+      <div className="flex gap-5">
+      {foundArtists.map((artist, i) => {
+        return (
+          <Artist artist={artist} key={i} />
+        );
+      })}
+      </div>
     </div>
   );
 }
