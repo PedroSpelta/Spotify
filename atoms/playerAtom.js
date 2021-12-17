@@ -10,3 +10,7 @@ export const webPlayerState = atom({
   default: undefined,
 })
 
+export const timeState = atom({
+  key:"timeState",
+  default: 0,
+})

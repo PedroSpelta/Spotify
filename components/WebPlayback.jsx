@@ -11,7 +11,7 @@ import useWebPlayback from "../hooks/useWebPlayback";
 function WebPlayback() {
   const spotifyApi = useSpotify();
   const current_track = useRecoilValue(currentTrack);
-  const [volume, setVolume] = useState(50);
+  const [volume, setVolume] = useState(10);
   const player = useWebPlayback();
 
   const debounceVolume = useCallback(

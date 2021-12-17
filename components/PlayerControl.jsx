@@ -48,7 +48,7 @@ function PlayerControl({player}) {
             onClick={() => {player.nextTrack()}}
           />
         </div>
-        {/* <TimeBar player = {player}/> */}
+        <TimeBar player = {player}/>
       </div>
   )
 }

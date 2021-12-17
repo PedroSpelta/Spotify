@@ -19,7 +19,7 @@ function FavoritesCenter() {
         console.log("Something went wrong!", err);
       }
     );
-    spotifyApi.getMyTopArtists({limit: 5}).then(
+    spotifyApi.getMyTopArtists({ limit: 5 }).then(
       function (data) {
         console.log(data.body.items);
         setTopArtists(data.body.items);
@@ -27,7 +27,7 @@ function FavoritesCenter() {
       function (err) {
         console.log("Something went wrong!", err);
       }
-    )
+    );
   }, [spotifyApi]);
 
   return (
@@ -38,11 +38,9 @@ function FavoritesCenter() {
         <div className="flex items-center teste gap-5 flex-wrap">
           {topTracks.map((track, i) => {
             return (
-              <div>
-
               <div
                 className={`relative pt-5 w-56 h-64 rounded-lg text-white text-xl overflow-hidden`}
-                key={i}
+                key={track.id}
                 style={{ backgroundColor: color[i] }}
               >
                 <p className="px-5 strunc">{track.name}</p>
@@ -51,7 +49,6 @@ function FavoritesCenter() {
                   className="w-36 h-3w-36 rotate-[24deg] overflow-hidden absolute bottom-[-10px] right-[-20px]"
                   alt=""
                 />
-              </div>
               </div>
             );
           })}
@@ -62,7 +59,7 @@ function FavoritesCenter() {
             return (
               <div
                 className={`relative pt-5 w-56 h-64 rounded-lg text-white text-xl overflow-hidden`}
-                key={i}
+                key={artist.id}
                 style={{ backgroundColor: color[i] }}
               >
                 <p className="px-5 strunc">{artist.name}</p>

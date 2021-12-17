@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { useRecoilState } from 'recoil';
-import { webPlayerState } from '../atoms/playerAtom';
-import { currentTrack, isActive, isPaused } from '../atoms/songAtom';
-import useSpotify from './useSpotify';
-
+import React, { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { timeState, webPlayerState } from "../atoms/playerAtom";
+import { currentTrack, isActive, isPaused } from "../atoms/songAtom";
+import useSpotify from "./useSpotify";
 
 function useWebPlayback() {
   const [oplayer, setPlayer] = useState(undefined);
@@ -11,6 +10,7 @@ function useWebPlayback() {
   const [is_paused, setPaused] = useRecoilState(isPaused);
   const [current_track, setTrack] = useRecoilState(currentTrack);
   const [is_active, setActive] = useRecoilState(isActive);
+  const [positon, setPosition] = useRecoilState(timeState);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -26,7 +26,6 @@ function useWebPlayback() {
         },
         volume: 0.1,
       });
-      console.log('web',player);
 
       setPlayer(player);
 
@@ -55,10 +54,11 @@ function useWebPlayback() {
         setPaused(state.paused);
 
         player.getCurrentState().then((state) => {
+          if (state) setPosition(state.position);
           !state ? setActive(false) : setActive(true);
         });
       });
-      
+
       player.connect();
     };
   }, []);
@@ -71,4 +71,4 @@ function useWebPlayback() {
   return oplayer;
 }
 
-export default useWebPlayback
+export default useWebPlayback;
