@@ -88,7 +88,7 @@ function TimeBar({ player }) {
           }}
         />
         <p className="text-gray-300 text-sm">
-          {millisToMinutesAndSeconds(duration_ms)}
+          {duration_ms ? millisToMinutesAndSeconds(duration_ms) : '0:00' }
         </p>
       </div>
     </>

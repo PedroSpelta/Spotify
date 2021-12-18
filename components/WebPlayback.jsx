@@ -4,7 +4,7 @@ import { debounce } from "lodash";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { currentTrack, isPaused } from "../atoms/songAtom";
+import { currentTrack, isActive, isPaused } from "../atoms/songAtom";
 import PlayerControl from "./PlayerControl";
 import useWebPlayback from "../hooks/useWebPlayback";
 
@@ -13,6 +13,7 @@ function WebPlayback() {
   const current_track = useRecoilValue(currentTrack);
   const [volume, setVolume] = useState(10);
   const player = useWebPlayback();
+  const is_active = useRecoilValue(isActive);
 
   const debounceVolume = useCallback(
     debounce((volume) => {
@@ -22,7 +23,7 @@ function WebPlayback() {
   );
 
   useEffect(() => {
-    if (volume > 0 && volume < 100) {
+    if (volume > 0 && volume < 100 && is_active) {
       debounceVolume(volume);
     }
   }, [volume]);

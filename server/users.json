@@ -1,7 +1,0 @@
-{
-  "data": [
-    { "name": "Pedro", "age": "23" },
-    { "name": "Maria", "age": 23 },
-    { "name": "Jorge", "age": 23 }
-  ]
-}

@@ -28,7 +28,6 @@ function Center() {
     spotifyApi
       .getPlaylist(playlistId)
       .then((data) => {
-        console.log("playlistdata", data);
         setPlaylist(data.body);
       })
       .catch((err) => console.log(err));
