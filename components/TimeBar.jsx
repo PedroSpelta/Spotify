@@ -1,15 +1,12 @@
-import { debounce } from "lodash";
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { currentTrack, isPaused } from "../atoms/songAtom";
 import Slider from "rc-slider";
 import { millisToMinutesAndSeconds } from "../lib/time";
-import { parseRelativeUrl } from "next/dist/shared/lib/router/utils/parse-relative-url";
 import { timeState } from "../atoms/playerAtom";
 
 function TimeBar({ player }) {
   const { duration_ms, uri } = useRecoilValue(currentTrack);
-  const [inputDuration, setInputDuration] = useState(0);
   const is_paused = useRecoilValue(isPaused);
   const [position, setPosition] = useRecoilState(timeState);
 
@@ -36,20 +33,15 @@ function TimeBar({ player }) {
 
   useEffect(() => {
     toggleTimer();
+    return function cleanup() {
+      console.log('clear');
+      clearInterval(timer);
+    };
   }, [is_paused]);
 
   useEffect(() => {
     resetTimer();
   }, [uri]);
-
-  const debouceDuration = useCallback(
-    debounce((inputDuration, player) => {
-      // if (player) {
-      //   player.seek(inputDuration);
-      // }
-    }, 500),
-    []
-  );
 
   useEffect(() => {
     setTime(position / 1000);
@@ -59,8 +51,8 @@ function TimeBar({ player }) {
   }, [position]);
 
   useEffect(() => {
-    debouceDuration(inputDuration, player);
-  }, [inputDuration]);
+    console.log("mount timebar");
+  }, []);
 
   return (
     <>
@@ -87,7 +79,7 @@ function TimeBar({ player }) {
           }}
         />
         <p className="text-gray-300 text-sm">
-          {duration_ms ? millisToMinutesAndSeconds(duration_ms) : '0:00' }
+          {duration_ms ? millisToMinutesAndSeconds(duration_ms) : "0:00"}
         </p>
       </div>
     </>

@@ -9,7 +9,7 @@ const DataContext = createContext();
 
 export function DataWrapper({ children }) {
   const [data, setData] = useState({
-    volume: 10,
+    volume: 2,
   });
 
   return (
