@@ -1,6 +1,5 @@
 import { debounce } from "lodash";
-import React, { useState } from "react";
-import { useCallback, useEffect } from "react/cjs/react.development";
+import React, { useState, useCallback, useEffect } from "react";
 import useSpotify from "../hooks/useSpotify";
 import Song from "../components/Song";
 import Link from "next/link";

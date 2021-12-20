@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import React, { useState, useEffect } from "react";
 import useSpotify from "../hooks/useSpotify";
 
 const color = ["#db3939", "#078f5f", "#0e2d66", "#ab58db", "#d613a2"];

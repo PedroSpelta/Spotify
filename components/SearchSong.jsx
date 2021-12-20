@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useState }  from 'react'
 import { millisToMinutesAndSeconds } from '../lib/time'
 import { BsThreeDots } from 'react-icons/bs'
-import { useState } from 'react/cjs/react.development'
 
 function SearchSong({ track, order, onClick }) {
   const [isHovered, setIsHovered] = useState(false);

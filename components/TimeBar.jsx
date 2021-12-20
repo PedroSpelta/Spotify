@@ -1,6 +1,5 @@
 import { debounce } from "lodash";
-import React, { useState } from "react";
-import { useCallback, useEffect } from "react/cjs/react.development";
+import React, { useState, useCallback, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { currentTrack, isPaused } from "../atoms/songAtom";
 import Slider from "rc-slider";
