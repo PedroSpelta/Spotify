@@ -35,7 +35,7 @@ function SearchCenter() {
 
   const searchInputDebounce = useCallback(
     debounce((searchInput) => {
-      if (spotifyApi) {
+      if (spotifyApi && searchInput !== '') {
         spotifyApi
           .searchTracks(searchInput, { limit: 5 })
           .then((data) => {

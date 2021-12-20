@@ -1,10 +1,13 @@
+import { createContext, useContext } from 'react';
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { timeState, webPlayerState } from "../atoms/playerAtom";
 import { currentTrack, isActive, isPaused } from "../atoms/songAtom";
-import useSpotify from "./useSpotify";
+import useSpotify from '../hooks/useSpotify';
 
-function useWebPlayback() {
+const PlayerContext = createContext();
+
+export function PlayerWrapper({ children }) {
   const [oplayer, setPlayer] = useState(undefined);
   const spotifyApi = useSpotify();
   const [is_paused, setPaused] = useRecoilState(isPaused);
@@ -13,6 +16,7 @@ function useWebPlayback() {
   const [positon, setPosition] = useRecoilState(timeState);
 
   useEffect(() => {
+    console.log('wrapper');
     const script = document.createElement("script");
     script.src = "https://sdk.scdn.co/spotify-player.js";
     script.async = true;
@@ -62,13 +66,15 @@ function useWebPlayback() {
       player.connect();
     };
   }, []);
+  
 
-  // useEffect(() => {
-  //   console.log('player change');
-  //   setGPlayer(oplayer)
-  // }, [oplayer])
-
-  return oplayer;
+  return (
+    <PlayerContext.Provider value={oplayer}>
+      {children}
+    </PlayerContext.Provider>
+  );
 }
 
-export default useWebPlayback;
+export function usePlayerContext() {
+  return useContext(PlayerContext);
+}
