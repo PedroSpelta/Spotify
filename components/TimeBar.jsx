@@ -4,44 +4,14 @@ import { currentTrack, isPaused } from "../atoms/songAtom";
 import Slider from "rc-slider";
 import { millisToMinutesAndSeconds } from "../lib/time";
 import { timeState } from "../atoms/playerAtom";
+import { useDataContext } from "../context/data";
 
 function TimeBar({ player }) {
   const { duration_ms, uri } = useRecoilValue(currentTrack);
-  const is_paused = useRecoilValue(isPaused);
+  // const is_paused = useRecoilValue(isPaused);
   const [position, setPosition] = useRecoilState(timeState);
-
-  const [time, setTime] = useState(0);
-  const [timer, setTimer] = useState(undefined);
-
-  const toggleTimer = () => {
-    if (!is_paused) {
-      setTimer(
-        setInterval(() => {
-          setTime((time) => time + 1);
-        }, 1000)
-      );
-    }
-    if (is_paused) {
-      clearInterval(timer);
-      setTimer(undefined);
-    }
-  };
-
-  const resetTimer = () => {
-    setTime(0);
-  };
-
-  useEffect(() => {
-    toggleTimer();
-    return function cleanup() {
-      console.log('clear');
-      clearInterval(timer);
-    };
-  }, [is_paused]);
-
-  useEffect(() => {
-    resetTimer();
-  }, [uri]);
+  const { time, setTime, is_paused } = useDataContext();
+  
 
   useEffect(() => {
     setTime(position / 1000);
@@ -49,10 +19,6 @@ function TimeBar({ player }) {
     // }
     // return;
   }, [position]);
-
-  useEffect(() => {
-    console.log("mount timebar");
-  }, []);
 
   return (
     <>

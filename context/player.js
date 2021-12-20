@@ -4,13 +4,15 @@ import { useRecoilState } from "recoil";
 import { timeState, webPlayerState } from "../atoms/playerAtom";
 import { currentTrack, isActive, isPaused } from "../atoms/songAtom";
 import useSpotify from '../hooks/useSpotify';
+import { useDataContext } from './data';
 
 const PlayerContext = createContext();
 
 export function PlayerWrapper({ children }) {
   const [oplayer, setPlayer] = useState(undefined);
   const spotifyApi = useSpotify();
-  const [is_paused, setPaused] = useRecoilState(isPaused);
+  const {is_paused, setPaused} = useDataContext();
+  // const [is_paused, setPaused] = useRecoilState(isPaused);
   const [current_track, setTrack] = useRecoilState(currentTrack);
   const [is_active, setActive] = useRecoilState(isActive);
   const [positon, setPosition] = useRecoilState(timeState);
