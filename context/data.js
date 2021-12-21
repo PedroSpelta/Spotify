@@ -25,7 +25,6 @@ export function DataWrapper({ children }) {
     if (!is_paused) {
       setTimer(
         setInterval(() => {
-          console.log(time);
           setTime((time) => time + 1);
         }, 1000)
       );

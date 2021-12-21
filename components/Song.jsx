@@ -1,9 +1,29 @@
 import React, { useState } from "react";
 import { millisToMinutesAndSeconds } from "../lib/time";
 import { BsThreeDots } from "react-icons/bs";
+import axios from "axios";
+import useSpotify from "../hooks/useSpotify";
 
 function Song({ track, order, onClick }) {
   const [isHovered, setIsHovered] = useState(false);
+  const spotifyApi = useSpotify();
+
+  const addToPlayback = (track) => {
+    const token = spotifyApi.getAccessToken();
+    console.log(token);
+    axios({
+      method: "POST",
+      url: `https://api.spotify.com/v1/me/player/queue?uri=${track.uri}`,
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((e) => {
+        console.log(e);
+      })
+      .catch((er) => {
+        console.log(er);
+      });
+  };
+
   return (
     <div
       className="grid grid-cols-2 text-gray-400 py-4 px-4 md:px-5 hover:bg-[#282828] rounded-lg cursor-pointer"
@@ -27,7 +47,14 @@ function Song({ track, order, onClick }) {
           </p>
           <BsThreeDots
             className={`ml-3 w-4 h-4 ${!isHovered && "hidden"}`}
-            onClick={() => console.log("teste")}
+            onClick={(e) => {
+              if (!e) {
+                const e = window.event;
+              }
+              e.cancelBubble = true;
+              if (e.stopPropagation) e.stopPropagation();
+              addToPlayback(track);
+            }}
           />
         </div>
       </div>

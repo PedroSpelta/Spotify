@@ -16,7 +16,6 @@ export function PlayerWrapper({ children }) {
   const [is_active, setActive] = useRecoilState(isActive);
 
   useEffect(() => {
-    console.log('wrapper');
     const script = document.createElement("script");
     script.src = "https://sdk.scdn.co/spotify-player.js";
     script.async = true;
@@ -58,7 +57,6 @@ export function PlayerWrapper({ children }) {
         setPaused(state.paused);
 
         player.getCurrentState().then((state) => {
-          console.log(state.position);
           if (state) setPosition(state.position);
           !state ? setActive(false) : setActive(true);
         });

@@ -1,9 +1,27 @@
-import React, { useState }  from 'react'
-import { millisToMinutesAndSeconds } from '../lib/time'
-import { BsThreeDots } from 'react-icons/bs'
+import React, { useState } from "react";
+import { millisToMinutesAndSeconds } from "../lib/time";
+import { BsThreeDots } from "react-icons/bs";
+import useSpotify from "../hooks/useSpotify";
+import axios from "axios";
 
 function SearchSong({ track, order, onClick }) {
   const [isHovered, setIsHovered] = useState(false);
+  const spotifyApi = useSpotify();
+
+  const addToPlayback = (track) => {
+    const token = spotifyApi.getAccessToken();
+    console.log(token);
+    axios({
+      method: "POST",
+      url: `https://api.spotify.com/v1/me/player/queue?uri=${track.uri}`,
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((e) => {})
+      .catch((er) => {
+        console.log(er);
+      });
+  };
+
   return (
     <div
       className="grid grid-cols-2 text-gray-400 py-1 px-2 hover:bg-[#282828] rounded-sm cursor-pointer mr-10"
@@ -19,11 +37,23 @@ function SearchSong({ track, order, onClick }) {
         </div>
       </div>
       <div className="flex items-center justify-end ml-auto md:ml-0 mr-10">
-        <p className={`${!isHovered && 'mr-7'}`}>{millisToMinutesAndSeconds(track.duration_ms)}</p>
-        <BsThreeDots className={`ml-3 w-4 h-4 ${!isHovered && 'hidden'}`} onClick={() => console.log('teste')}/>
+        <p className={`${!isHovered && "mr-7"}`}>
+          {millisToMinutesAndSeconds(track.duration_ms)}
+        </p>
+        <BsThreeDots
+          className={`ml-3 w-4 h-4 ${!isHovered && "hidden"}`}
+          onClick={(e) => {
+            if (!e) {
+              const e = window.event;
+            }
+            e.cancelBubble = true;
+            if (e.stopPropagation) e.stopPropagation();
+            addToPlayback(track);
+          }}
+        />
       </div>
     </div>
-  )
+  );
 }
 
-export default SearchSong
+export default SearchSong;
