@@ -1,8 +1,8 @@
 import { createContext, useContext } from 'react';
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { timeState, webPlayerState } from "../atoms/playerAtom";
-import { currentTrack, isActive, isPaused } from "../atoms/songAtom";
+import { timeState } from "../atoms/playerAtom";
+import { isActive } from "../atoms/songAtom";
 import useSpotify from '../hooks/useSpotify';
 import { useDataContext } from './data';
 
@@ -11,11 +11,9 @@ const PlayerContext = createContext();
 export function PlayerWrapper({ children }) {
   const [oplayer, setPlayer] = useState(undefined);
   const spotifyApi = useSpotify();
-  const {is_paused, setPaused} = useDataContext();
-  // const [is_paused, setPaused] = useRecoilState(isPaused);
-  const [current_track, setTrack] = useRecoilState(currentTrack);
+  const {is_paused, setPaused, setPosition} = useDataContext();
+  const { setCurrentTrack } = useDataContext();
   const [is_active, setActive] = useRecoilState(isActive);
-  const [positon, setPosition] = useRecoilState(timeState);
 
   useEffect(() => {
     console.log('wrapper');
@@ -56,10 +54,11 @@ export function PlayerWrapper({ children }) {
         if (!state) {
           return;
         }
-        setTrack(state.track_window.current_track);
+        setCurrentTrack(state.track_window.current_track);
         setPaused(state.paused);
 
         player.getCurrentState().then((state) => {
+          console.log(state.position);
           if (state) setPosition(state.position);
           !state ? setActive(false) : setActive(true);
         });

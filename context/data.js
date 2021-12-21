@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { createContext, useContext } from "react";
-import { currentTrack } from "../atoms/songAtom";
-import { useRecoilValue } from "recoil";
+
+const track = {
+  name: "",
+  album: {
+    images: [{ url: "" }],
+  },
+  artists: [{ name: "" }],
+};
 
 const DataContext = createContext();
 
@@ -9,24 +15,23 @@ export function DataWrapper({ children }) {
   const [data, setData] = useState({
     volume: 2,
   });
-  const [is_paused, setPaused] = useState(true);
   const [time, setTime] = useState(0);
   const [timer, setTimer] = useState(undefined);
-  const { uri } = useRecoilValue(currentTrack);
+  const [is_paused, setPaused] = useState(true);
+  const [currentTrack, setCurrentTrack] = useState(track);
+  const [position, setPosition] = useState(0);
 
   const toggleTimer = () => {
     if (!is_paused) {
-      console.log("start");
       setTimer(
         setInterval(() => {
+          console.log(time);
           setTime((time) => time + 1);
         }, 1000)
       );
       return;
     }
     if (is_paused) {
-      console.log("stop");
-
       clearInterval(timer);
       setTimer(undefined);
       return;
@@ -38,17 +43,20 @@ export function DataWrapper({ children }) {
   };
 
   useEffect(() => {
-    console.log('toggle');
     toggleTimer();
   }, [is_paused]);
 
   useEffect(() => {
     resetTimer();
-  }, [uri]);
+  }, [currentTrack.uri]);
+  
+  useEffect(() => {
+    setTime(position / 1000);
+  }, [position]);
 
   return (
     <DataContext.Provider
-      value={{ data, setData, time, setTime, is_paused, setPaused }}
+      value={{ data, setData, time, setTime, is_paused, setPaused, setCurrentTrack, currentTrack, setPosition }}
     >
       {children}
     </DataContext.Provider>

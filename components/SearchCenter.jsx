@@ -35,7 +35,7 @@ function SearchCenter() {
 
   const searchInputDebounce = useCallback(
     debounce((searchInput) => {
-      if (spotifyApi && searchInput !== '') {
+      if (spotifyApi && searchInput !== "") {
         spotifyApi
           .searchTracks(searchInput, { limit: 5 })
           .then((data) => {
@@ -80,10 +80,9 @@ function SearchCenter() {
             backgroundPositionY: "center",
           }}
         ></input>
-
       </div>
-      
-      {foundArtists.length > 0 ? (
+
+      {foundTracks.length > 0 ? (
         <p className="font-bold text-white text-2xl my-7">Músicas</p>
       ) : null}
 
