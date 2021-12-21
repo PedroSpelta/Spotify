@@ -20,6 +20,7 @@ export function DataWrapper({ children }) {
   const [is_paused, setPaused] = useState(true);
   const [currentTrack, setCurrentTrack] = useState(track);
   const [position, setPosition] = useState(0);
+  const [lyrics, setLyrics] = useState([]);
 
   const toggleTimer = () => {
     if (!is_paused) {
@@ -48,14 +49,26 @@ export function DataWrapper({ children }) {
   useEffect(() => {
     resetTimer();
   }, [currentTrack.uri]);
-  
+
   useEffect(() => {
     setTime(position / 1000);
   }, [position]);
 
   return (
     <DataContext.Provider
-      value={{ data, setData, time, setTime, is_paused, setPaused, setCurrentTrack, currentTrack, setPosition }}
+      value={{
+        lyrics,
+        setLyrics,
+        data,
+        setData,
+        time,
+        setTime,
+        is_paused,
+        setPaused,
+        setCurrentTrack,
+        currentTrack,
+        setPosition,
+      }}
     >
       {children}
     </DataContext.Provider>
