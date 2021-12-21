@@ -45,7 +45,7 @@ function Sidebar() {
             <p>Procurar</p>
           </button>
           </Link>
-          <Link href={'/social'}>
+          <Link href={'/'}>
           <button className="flex space-x-2 items-center hover:text-white duration-300  font-semibold">
             <LibraryIcon className="h-5 w-5" />
             <p>Social</p>
