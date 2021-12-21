@@ -16,9 +16,7 @@ function Song({ track, order, onClick }) {
       url: `https://api.spotify.com/v1/me/player/queue?uri=${track.uri}`,
       headers: { Authorization: `Bearer ${token}` },
     })
-      .then((e) => {
-        console.log(e);
-      })
+      .then((e) => {})
       .catch((er) => {
         console.log(er);
       });
