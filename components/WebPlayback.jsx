@@ -8,8 +8,7 @@ import PlayerControl from "./PlayerControl";
 import { usePlayerContext } from "../context/player";
 import { useDataContext } from "../context/data";
 import { FiMic } from "react-icons/fi";
-import { BiVolumeLow} from 'react-icons/bi'
-import { getLyrics } from "../lib/lyrics";
+import { BiVolumeLow } from "react-icons/bi";
 
 function WebPlayback() {
   const { data, setData, setShowLyrics, currentTrack, setLyrics } =
@@ -29,19 +28,16 @@ function WebPlayback() {
           />
           <div className="flex flex-col xl:w-[350px] lg:w-[280px] md:w-[150px] ">
             <p className="truncate font-bold">{currentTrack?.name}</p>
-            <p className="text-gray-400 text-sm">{currentTrack?.artists?.[0]?.name}</p>
+            <p className="text-gray-400 text-sm">
+              {currentTrack?.artists?.[0]?.name}
+            </p>
           </div>
         </div>
         <PlayerControl player={player} />
         <div className="flex items-center justify-center gap-3">
           <FiMic
-            onClick={async () => {
+            onClick={() => {
               setShowLyrics((state) => !state);
-              console.log(currentTrack);
-              const title = currentTrack.name;
-              const artist = currentTrack.artists[0].name;
-              const lyrics = await getLyrics(title + " " + artist);
-              setLyrics(lyrics);
             }}
           />
           <BiVolumeLow />
