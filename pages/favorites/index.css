@@ -1,7 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@800&family=Bakbak+One&display=swap');
 
 .teste {
   font-family: "Bakbak One";
+}
+
+.lyric-font {
+  font-family: "Assistant";
 }
 
 .strunc {

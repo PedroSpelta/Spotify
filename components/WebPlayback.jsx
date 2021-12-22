@@ -3,18 +3,20 @@ import useSpotify from "../hooks/useSpotify";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import { useRecoilValue } from "recoil";
-import { currentTrack, isActive } from "../atoms/songAtom";
+import { isActive } from "../atoms/songAtom";
 import PlayerControl from "./PlayerControl";
 import { usePlayerContext } from "../context/player";
 import { useDataContext } from "../context/data";
+import { FiMic } from "react-icons/fi";
+import { BiVolumeLow} from 'react-icons/bi'
+import { getLyrics } from "../lib/lyrics";
 
 function WebPlayback() {
-  const spotifyApi = useSpotify();
-  // const currentTrack = useRecoilValue(currentTrack);
-  const {currentTrack} = useDataContext();
-  const player = usePlayerContext();
+  const { data, setData, setShowLyrics, currentTrack, setLyrics } =
+    useDataContext();
   const is_active = useRecoilValue(isActive);
-  const { data, setData } = useDataContext();
+  const player = usePlayerContext();
+  const spotifyApi = useSpotify();
 
   return (
     <>
@@ -25,13 +27,25 @@ function WebPlayback() {
             src={currentTrack?.album.images?.[0].url}
             alt=""
           />
-          <div>
-            <h3>{currentTrack?.name}</h3>
-            <p>{currentTrack?.artists?.[0]?.name}</p>
+          <div className="flex flex-col xl:w-[350px] lg:w-[280px] md:w-[150px] ">
+            <p className="truncate font-bold">{currentTrack?.name}</p>
+            <p className="text-gray-400 text-sm">{currentTrack?.artists?.[0]?.name}</p>
           </div>
         </div>
         <PlayerControl player={player} />
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center gap-3">
+          <FiMic
+            onClick={async () => {
+              setShowLyrics((state) => !state);
+              console.log(currentTrack);
+              const title = currentTrack.name;
+              const artist = currentTrack.artists[0].name;
+              const lyrics = await getLyrics(title + " " + artist);
+              setLyrics(lyrics);
+            }}
+          />
+          <BiVolumeLow />
+
           <div className="w-32">
             <Slider
               min={0}

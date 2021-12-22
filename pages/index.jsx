@@ -1,11 +1,15 @@
 import Head from "next/head";
 import Center from "../components/Center";
 import Sidebar from "../components/Sidebar";
-import {getSession} from "next-auth/react"
+import { getSession } from "next-auth/react";
 import Player from "../components/Player";
 import WebPlayback from "../components/WebPlayback";
+import { useDataContext } from "../context/data";
+import Lyrics from "../components/Lyrics";
 
 export default function Home() {
+  const { showLyrics } = useDataContext();
+
   return (
     <>
       <Head>
@@ -15,7 +19,7 @@ export default function Home() {
       <div className="bg-black h-screen overflow-hidden">
         <main className="flex">
           <Sidebar />
-          <Center />
+          {showLyrics ? <Lyrics /> : <Center />}
         </main>
         <div className="sticky bottom-0">
           <WebPlayback />
@@ -26,10 +30,10 @@ export default function Home() {
 }
 
 export async function getServerSideProps(context) {
-  const session = await getSession(context)
+  const session = await getSession(context);
   return {
     props: {
       session,
-    }
-  }
+    },
+  };
 }

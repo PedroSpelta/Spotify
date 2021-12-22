@@ -21,6 +21,7 @@ export function DataWrapper({ children }) {
   const [currentTrack, setCurrentTrack] = useState(track);
   const [position, setPosition] = useState(0);
   const [lyrics, setLyrics] = useState([]);
+  const [showLyrics, setShowLyrics] = useState(false);
 
   const toggleTimer = () => {
     if (!is_paused) {
@@ -57,6 +58,8 @@ export function DataWrapper({ children }) {
   return (
     <DataContext.Provider
       value={{
+        showLyrics,
+        setShowLyrics,
         lyrics,
         setLyrics,
         data,
