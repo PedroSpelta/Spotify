@@ -1,6 +1,7 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { createContext, useContext } from "react";
-import { getLyrics } from "../lib/lyrics";
+import { getLyricArray, getLyrics } from "../lib/lyrics";
 
 const track = {
   name: "",
@@ -48,12 +49,20 @@ export function DataWrapper({ children }) {
     toggleTimer();
   }, [is_paused]);
 
-  useEffect( async () => {
+  useEffect(async () => {
     resetTimer();
     const title = currentTrack.name;
     const artist = currentTrack.artists[0].name;
-    const lyrics = await getLyrics(title + " " + artist);
-    setLyrics(lyrics);
+    const searchTerm = title + " " + artist;
+    await axios({
+      method: "post",
+      url: "/api/lyrics",
+      data: { searchTerm: searchTerm },
+    }).then((res) => {
+      const { lyric } = res.data;
+      const lyricArray = getLyricArray(lyric);
+      setLyrics(lyricArray);
+    });
   }, [currentTrack.uri]);
 
   useEffect(() => {
