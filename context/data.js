@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { createContext, useContext } from "react";
+import useSpotify from "../hooks/useSpotify";
 import { getLyricArray, getLyrics } from "../lib/lyrics";
 
 const track = {
@@ -24,6 +25,8 @@ export function DataWrapper({ children }) {
   const [position, setPosition] = useState(0);
   const [lyrics, setLyrics] = useState([]);
   const [showLyrics, setShowLyrics] = useState(false);
+  const [playback, setPlayback] = useState();
+  const spotifyApi = useSpotify();
 
   const toggleTimer = () => {
     if (!is_paused) {
@@ -45,8 +48,9 @@ export function DataWrapper({ children }) {
     setTime(0);
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     toggleTimer();
+    console.log(await spotifyApi.que());
   }, [is_paused]);
 
   useEffect(async () => {
@@ -72,6 +76,8 @@ export function DataWrapper({ children }) {
   return (
     <DataContext.Provider
       value={{
+        playback,
+        setPlayback,
         showLyrics,
         setShowLyrics,
         lyrics,

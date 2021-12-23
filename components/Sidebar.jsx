@@ -33,7 +33,7 @@ function Sidebar() {
           <div className="mb-10">
             <SpotifyLogo />
           </div>
-          <Link href={"/"}>
+          <Link href={"/playback"}>
             <button className="flex space-x-2 items-center hover:text-white duration-300 font-semibold">
               <HomeIcon className="h-5 w-5" />
               <p>Início</p>
