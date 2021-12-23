@@ -20,18 +20,15 @@ export default async function handler(req, res) {
   const {searchTerm} = req.body;
   const searchTermLink = getTitleLink(searchTerm);
 
-  const lyricUrl = `https://www.google.com/search?q=${searchTermLink}+lyrics`;
-
   return await axios({
     method: "get",
     withCredentials: false,
-    url: lyricUrl,
+    url: searchTermLink,
   })
     .then((axiosRes) => {
       const html = axiosRes.data;
       const $ = cheerio.load(html);
-      const lyricArray = [];
-      const allHwc = $(".hwc", html);
+      const allHwc = $(".hwc");
       const lyric = $(allHwc[0]).text();
       return res.json({ lyric });
     })
