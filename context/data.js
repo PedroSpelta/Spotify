@@ -50,12 +50,12 @@ export function DataWrapper({ children }) {
 
   useEffect(async () => {
     toggleTimer();
-    console.log(await spotifyApi.que());
   }, [is_paused]);
 
   useEffect(async () => {
     resetTimer();
     const title = currentTrack.name;
+    if (currentTrack.name === '') return
     const artist = currentTrack.artists[0].name;
     const searchTerm = title + " " + artist;
     await axios({
@@ -63,6 +63,7 @@ export function DataWrapper({ children }) {
       url: "/api/lyrics",
       data: { searchTerm: searchTerm },
     }).then((res) => {
+      console.log('teste',res.data);
       const { lyric } = res.data;
       const lyricArray = getLyricArray(lyric);
       setLyrics(lyricArray);
