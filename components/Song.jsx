@@ -38,7 +38,7 @@ function Song({ track, order, onClick }) {
         </div>
       </div>
       <div className="flex items-center justify-between ml-auto md:ml-0">
-        <p className="w-40 hidden album-truncate">{track.album.name}</p>
+        <p className="w-40 invisible md:visible strunc">{track.album.name}</p>
         <div className="flex items-center justify-end ml-auto md:ml-0 mr-10">
           <p className={`${!isHovered && "mr-7"}`}>
             {millisToMinutesAndSeconds(track.duration_ms)}

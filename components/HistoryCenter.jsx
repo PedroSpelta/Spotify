@@ -54,6 +54,7 @@ function HistoryCenter() {
           <LibraryIcon className="w-10 h-10" />
         </div>
       </PlaylistHeader>
+      
       {/* historico de musicas */}
       <div className="flex flex-col px-16">
         <p className="text-3xl text-white teste mb-5">Histórico</p>
