@@ -1,0 +1,26 @@
+import { getSession } from "next-auth/react";
+import React from "react";
+import Sidebar from "../../components/Sidebar";
+import WebPlayback from "../../components/WebPlayback";
+
+export default function index() {
+  return (
+    <div className="bg-[#121212] h-screen overflow-hidden">
+      <main className="flex">
+        <Sidebar />
+      </main>
+      <div className="sticky bottom-0">
+        <WebPlayback />
+      </div>
+    </div>
+  );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context)
+  return {
+    props: {
+      session,
+    }
+  }
+}

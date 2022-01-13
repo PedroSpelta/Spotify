@@ -15,7 +15,7 @@ import Link from "next/link";
 import SpotifyLogo from "./SpotifyLogo";
 
 function Sidebar() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [playlists, setPlaylists] = useState([]);
   const [playlistId, setPlaylistId] = useRecoilState(playlistIdState);
   const spotifyApi = useSpotify();
@@ -69,18 +69,27 @@ function Sidebar() {
               <p>Favoritos</p>
             </button>
           </Link>
+          <Link href={"/history"}>
+            <button className="flex space-x-2 items-center hover:text-white duration-300  font-semibold">
+              <LibraryIcon className="h-5 w-5" />
+              <p>Histórico</p>
+            </button>
+          </Link>
           <hr className="border-t-[0.1px] border-gray-500" />
 
           {/* playlists */}
 
           {playlists.map((playlist) => (
-            <p
-              key={playlist.id}
-              className="cursor-pointer hover:text-white duration-300  font-semibold"
-              onClick={() => setPlaylistId(playlist.id)}
-            >
-              {playlist.name}
-            </p>
+            <Link href={"/"} passHref key={playlist.id}>
+              <p
+                className="cursor-pointer hover:text-white duration-300  font-semibold"
+                onClick={async () => {
+                  setPlaylistId(playlist.id);
+                }}
+              >
+                {playlist.name}
+              </p>
+            </Link>
           ))}
         </div>
       </div>
