@@ -1,6 +1,9 @@
+import { HeartIcon } from "@heroicons/react/solid";
 import React, { useEffect, useState } from "react";
 import useSpotify from "../hooks/useSpotify";
+import PlaylistHeader from "./PlaylistHeader";
 import Song from "./Song";
+import UserHeaderImg from "./UserHeaderImg";
 
 function LikedCenter() {
   const spotifyApi = useSpotify();
@@ -29,13 +32,24 @@ function LikedCenter() {
   };
 
   return (
-    <div className="h-screen w-full overflow-y-scroll scrollbar-hide">
-      {/* Back ground color do topo */}
-      <div className="h-80 flex bg-gradient-to-b from-green-600 to-[#121212] -mt-20 "></div>
+    <div className="h-screen w-full overflow-y-scroll scrollbar-hide relative">
+
+      {/* user top image sign out */}
+      <UserHeaderImg />
+      
+      {/* user header */}
+      <PlaylistHeader
+        color="from-indigo-500"
+        label="PLAYLIST"
+        name="Musicas curtidas"
+      >
+        <div className="w-[176px] h-[176px] flex justify-center items-center bg-gradient-to-tl from-[#798C8A] to-indigo-800 shadow-2xl">
+          <HeartIcon className="w-10 h-10" />
+        </div>
+      </PlaylistHeader>
 
       {/* historico de musicas */}
       <div className="flex flex-col px-16">
-        <p className="text-3xl text-white teste mb-5">Músicas Curtidas</p>
         <div className="flex flex-col teste flex-wrap">
           {likedTracks.map((track, index) => {
             return (

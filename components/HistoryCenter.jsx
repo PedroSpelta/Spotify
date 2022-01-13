@@ -1,6 +1,9 @@
+import { LibraryIcon } from "@heroicons/react/outline";
 import React, { useEffect, useState } from "react";
 import useSpotify from "../hooks/useSpotify";
+import PlaylistHeader from "./PlaylistHeader";
 import Song from "./Song";
+import UserHeaderImg from "./UserHeaderImg";
 
 function HistoryCenter() {
   const spotifyApi = useSpotify();
@@ -37,10 +40,20 @@ function HistoryCenter() {
   };
 
   return (
-    <div className="h-screen w-full overflow-y-scroll scrollbar-hide">
-      {/* Back ground color do topo */}
-      <div className="h-80 flex bg-gradient-to-b from-green-600 to-[#121212] -mt-20 "></div>
+    <div className="h-screen w-full overflow-y-scroll scrollbar-hide relative">
+      {/* user top image sign out */}
+      <UserHeaderImg />
 
+      {/* user header */}
+      <PlaylistHeader
+        color="from-yellow-600"
+        label="PLAYLIST"
+        name="Histórico"
+      >
+        <div className="w-[176px] h-[176px] flex justify-center items-center bg-gradient-to-tl from-[#7a815e] to-yellow-800 shadow-2xl">
+          <LibraryIcon className="w-10 h-10" />
+        </div>
+      </PlaylistHeader>
       {/* historico de musicas */}
       <div className="flex flex-col px-16">
         <p className="text-3xl text-white teste mb-5">Histórico</p>

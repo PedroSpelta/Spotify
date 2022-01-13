@@ -1,6 +1,9 @@
+import { StarIcon } from "@heroicons/react/solid";
 import React, { useState, useEffect } from "react";
 import useSpotify from "../hooks/useSpotify";
+import PlaylistHeader from "./PlaylistHeader";
 import Song from "./Song";
+import UserHeaderImg from "./UserHeaderImg";
 
 const color = ["#db3939", "#078f5f", "#0e2d66", "#ab58db", "#d613a2"];
 
@@ -40,11 +43,23 @@ function FavoritesCenter() {
 
   return (
     <div className="h-screen w-full overflow-y-scroll scrollbar-hide">
-      {/* Back ground color do topo */}
-      <div className="h-80 flex bg-gradient-to-b from-green-600 to-[#121212] "></div>
 
+      {/* user top image sign out */}
+      <UserHeaderImg />
+
+      {/* user header */}
+      <PlaylistHeader
+        color="from-blue-400"
+        label="PLAYLIST"
+        name="Favoritos"
+      >
+        <div className="w-[176px] h-[176px] flex justify-center items-center bg-gradient-to-tl from-[#a9d1f1] to-blue-800 shadow-2xl">
+          <StarIcon className="w-10 h-10" />
+        </div>
+      </PlaylistHeader>
+      
       {/* Aristas mais tocados */}
-      <div className="flex flex-col px-16 mt-[-300px]">
+      <div className="flex flex-col px-16">
         <p className="text-3xl text-white teste pt-20 mb-5">Artistas mais tocados</p>
         <div className="flex items-center teste gap-5 flex-wrap">
           {topArtists.map((artist, i) => {
