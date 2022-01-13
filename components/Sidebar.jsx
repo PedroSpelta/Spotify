@@ -35,40 +35,42 @@ function Sidebar() {
           <div className="mb-10">
             <SpotifyLogo />
           </div>
+
+          {/* Link inicio */}
           <Link href={"/"}>
             <button className="flex space-x-2 items-center hover:text-white duration-300 font-semibold">
               <HomeIcon className="h-5 w-5" />
               <p>Início</p>
             </button>
           </Link>
+
+          {/* Link procurar */}
           <Link href={"/search"}>
             <button className="flex space-x-2 items-center hover:text-white duration-300  font-semibold">
               <SearchIcon className="h-5 w-5" />
               <p>Procurar</p>
             </button>
           </Link>
-          {/* <Link href={'/'}>
-          <button className="flex space-x-2 items-center hover:text-white duration-300  font-semibold">
-            <LibraryIcon className="h-5 w-5" />
-            <p>Social</p>
-          </button>
-          </Link> */}
+
           <hr className="border-t-[0.1px] border-gray-500" />
 
-          {/* <button className="flex space-x-2 items-center hover:text-white duration-300  font-semibold">
-            <PlusCircleIcon className="h-5 w-5" />
-            <p>Criar playlist</p>
-          </button> */}
-          <button className="flex space-x-2 items-center hover:text-white duration-300  font-semibold">
-            <HeartIcon className="h-5 w-5" />
-            <p>Músicas curtidas</p>
-          </button>
+          {/* Link curtidas */}
+          <Link href={"/liked"} passHref>
+            <button className="flex space-x-2 items-center hover:text-white duration-300  font-semibold">
+              <HeartIcon className="h-5 w-5" />
+              <p>Músicas curtidas</p>
+            </button>
+          </Link>
+
+          {/* Link favoritas */}
           <Link href={"/favorites"}>
             <button className="flex space-x-2 items-center hover:text-white duration-300  font-semibold">
               <StarIcon className="h-5 w-5" />
               <p>Favoritos</p>
             </button>
           </Link>
+
+          {/* Link historico */}
           <Link href={"/history"}>
             <button className="flex space-x-2 items-center hover:text-white duration-300  font-semibold">
               <LibraryIcon className="h-5 w-5" />
