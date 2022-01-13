@@ -1,7 +1,6 @@
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import { signOut, useSession } from "next-auth/react";
 import React from "react";
-import { useEffect } from "react/cjs/react.development";
 import { usePlayerContext } from "../context/player";
 import useSpotify from "../hooks/useSpotify";
 import Songs from "./Songs";
