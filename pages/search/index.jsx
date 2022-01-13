@@ -6,7 +6,7 @@ import WebPlayback from "../../components/WebPlayback";
 
 export default function index() {
   return (
-    <div className="bg-[#121212] h-screen">
+    <div className="bg-[#121212] h-screen overflow-hidden">
       <main className="flex">
         <Sidebar />
         <SearchCenter />
