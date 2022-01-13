@@ -4,6 +4,8 @@ import {
   SearchIcon,
   LibraryIcon,
   PlusCircleIcon,
+  HeartIcon,
+  StarIcon,
 } from "@heroicons/react/solid";
 import { useSession } from "next-auth/react";
 import useSpotify from "../hooks/useSpotify";
@@ -33,37 +35,37 @@ function Sidebar() {
           <div className="mb-10">
             <SpotifyLogo />
           </div>
-          <Link href={"/playback"}>
+          <Link href={"/"}>
             <button className="flex space-x-2 items-center hover:text-white duration-300 font-semibold">
               <HomeIcon className="h-5 w-5" />
               <p>Início</p>
             </button>
           </Link>
-          <Link href={'/search'} >
-          <button className="flex space-x-2 items-center hover:text-white duration-300  font-semibold">
-            <SearchIcon className="h-5 w-5" />
-            <p>Procurar</p>
-          </button>
+          <Link href={"/search"}>
+            <button className="flex space-x-2 items-center hover:text-white duration-300  font-semibold">
+              <SearchIcon className="h-5 w-5" />
+              <p>Procurar</p>
+            </button>
           </Link>
-          <Link href={'/'}>
+          {/* <Link href={'/'}>
           <button className="flex space-x-2 items-center hover:text-white duration-300  font-semibold">
             <LibraryIcon className="h-5 w-5" />
             <p>Social</p>
           </button>
-          </Link>
+          </Link> */}
           <hr className="border-t-[0.1px] border-gray-500" />
 
-          <button className="flex space-x-2 items-center hover:text-white duration-300  font-semibold">
+          {/* <button className="flex space-x-2 items-center hover:text-white duration-300  font-semibold">
             <PlusCircleIcon className="h-5 w-5" />
             <p>Criar playlist</p>
-          </button>
+          </button> */}
           <button className="flex space-x-2 items-center hover:text-white duration-300  font-semibold">
-            <SearchIcon className="h-5 w-5" />
+            <HeartIcon className="h-5 w-5" />
             <p>Músicas curtidas</p>
           </button>
           <Link href={"/favorites"}>
             <button className="flex space-x-2 items-center hover:text-white duration-300  font-semibold">
-              <LibraryIcon className="h-5 w-5" />
+              <StarIcon className="h-5 w-5" />
               <p>Favoritos</p>
             </button>
           </Link>

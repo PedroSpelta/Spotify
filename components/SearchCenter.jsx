@@ -1,11 +1,11 @@
 import { debounce } from "lodash";
 import React, { useState, useCallback, useEffect } from "react";
 import useSpotify from "../hooks/useSpotify";
-import Song from "../components/Song";
 import Link from "next/link";
 import axios from "axios";
 import Artist from "./Artist";
 import SearchSong from "./SearchSong";
+import { SearchIcon } from "@heroicons/react/solid";
 
 function SearchCenter() {
   const spotifyApi = useSpotify();
@@ -65,21 +65,22 @@ function SearchCenter() {
       <Link className="hidden" href={"/"}>
         <p className="md:hidden text-white">voltar</p>
       </Link>
-      <div className="flex justify-center md:justify-start ml-[-28px] md:ml-0">
+      <div className="flex justify-center md:justify-start ml-[-28px] md:ml-0 relative">
         <input
           type="text"
           placeholder="Procurar uma música"
           className="w-[250px] h-[40px] rounded-full pl-12 pb-1 focus:outline-none md:w-[350px] mt-3"
           onChange={(e) => setSearchInput(e.target.value)}
-          style={{
-            background:
-              "url('https://www.iconpacks.net/icons/2/free-search-icon-2903-thumb.png') no-repeat",
-            backgroundSize: "26px",
-            backgroundColor: "white",
-            backgroundPositionX: "10px",
-            backgroundPositionY: "center",
-          }}
-        ></input>
+          // style={{
+          //   background:
+          //     "url('https://www.iconpacks.net/icons/2/free-search-icon-2903-thumb.png') no-repeat",
+          //   backgroundSize: "26px",
+          //   backgroundColor: "white",
+          //   backgroundPositionX: "10px",
+          //   backgroundPositionY: "center",
+          // }}
+        />
+        <SearchIcon className="absolute w-7 h-7 mt-[18px] ml-2 text-gray-700" />
       </div>
 
       {foundTracks.length > 0 ? (

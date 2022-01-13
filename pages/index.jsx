@@ -5,10 +5,10 @@ import { getSession } from "next-auth/react";
 import WebPlayback from "../components/WebPlayback";
 import { useDataContext } from "../context/data";
 import Lyrics from "../components/Lyrics";
+import { useEffect } from "react";
 
 export default function Home() {
   const { showLyrics } = useDataContext();
-
   return (
     <>
       <Head>

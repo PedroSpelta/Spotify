@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useSpotify from "../hooks/useSpotify";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
@@ -13,6 +13,10 @@ function WebPlayback() {
     useDataContext();
   const player = usePlayerContext();
   const spotifyApi = useSpotify();
+
+  useEffect(async () => {
+    console.log( await spotifyApi.getMyRecentlyPlayedTracks({ limit: 20 }));
+  }, []);
 
   return (
     <>
