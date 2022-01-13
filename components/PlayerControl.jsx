@@ -1,14 +1,15 @@
-import React from "react";
-import { useRecoilValue } from "recoil";
-import { isPaused } from "../atoms/songAtom";
+import React, { useEffect } from "react";
 import { BiSkipPrevious, BiSkipNext, BiPlay } from "react-icons/bi";
 import { IoIosPause } from "react-icons/io";
 import TimeBar from "./TimeBar";
 import { useDataContext } from "../context/data";
 
 function PlayerControl({ player }) {
-  // const is_paused = useRecoilValue(isPaused);
-  const {is_paused} = useDataContext();
+  const { is_paused } = useDataContext();
+
+  useEffect(async () => {
+    if (!player) return;
+  }, [player]);
 
   return (
     <div className="flex items-center justify-center flex-col">

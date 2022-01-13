@@ -2,7 +2,6 @@ import Head from "next/head";
 import Center from "../components/Center";
 import Sidebar from "../components/Sidebar";
 import { getSession } from "next-auth/react";
-import Player from "../components/Player";
 import WebPlayback from "../components/WebPlayback";
 import { useDataContext } from "../context/data";
 import Lyrics from "../components/Lyrics";

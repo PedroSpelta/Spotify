@@ -2,8 +2,6 @@ import React from "react";
 import useSpotify from "../hooks/useSpotify";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-import { useRecoilValue } from "recoil";
-import { isActive } from "../atoms/songAtom";
 import PlayerControl from "./PlayerControl";
 import { usePlayerContext } from "../context/player";
 import { useDataContext } from "../context/data";
@@ -13,7 +11,6 @@ import { BiVolumeLow } from "react-icons/bi";
 function WebPlayback() {
   const { data, setData, setShowLyrics, currentTrack, setLyrics } =
     useDataContext();
-  const is_active = useRecoilValue(isActive);
   const player = usePlayerContext();
   const spotifyApi = useSpotify();
 

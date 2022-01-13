@@ -1,23 +1,16 @@
-import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { playlistState } from "../atoms/playlistAtom";
-import { useDataContext } from "../context/data";
 import useSpotify from "../hooks/useSpotify";
-import { getLyrics } from "../lib/lyrics";
 import Song from "./Song";
 
 function Songs() {
   const playList = useRecoilValue(playlistState);
   const spotifyApi = useSpotify();
   const [playlist, setPlaylist] = useRecoilState(playlistState);
-  const { setLyrics } = useDataContext();
 
   const playSong = async (order) => {
     const playlistUris = playlist.tracks.items.map((song) => song.track.uri);
-    // const title = playlist.tracks.items[0].track.name;
-    
-
     spotifyApi.play({
       uris: playlistUris,
       offset: {

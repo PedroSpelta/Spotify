@@ -1,19 +1,15 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext } from "react";
 import React, { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import { timeState } from "../atoms/playerAtom";
-import { isActive } from "../atoms/songAtom";
-import useSpotify from '../hooks/useSpotify';
-import { useDataContext } from './data';
+import useSpotify from "../hooks/useSpotify";
+import { useDataContext } from "./data";
 
 const PlayerContext = createContext();
 
 export function PlayerWrapper({ children }) {
   const [oplayer, setPlayer] = useState(undefined);
   const spotifyApi = useSpotify();
-  const {is_paused, setPaused, setPosition} = useDataContext();
+  const { is_paused, setPaused, setPosition } = useDataContext();
   const { setCurrentTrack } = useDataContext();
-  const [is_active, setActive] = useRecoilState(isActive);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -36,7 +32,7 @@ export function PlayerWrapper({ children }) {
         console.log("Ready with Device ID", device_id);
         const deviceIds = [device_id];
         spotifyApi.transferMyPlayback(deviceIds).then(
-          function () {
+          function async () {
             console.log("Transfering playback to " + deviceIds);
           },
           function (err) {
@@ -58,19 +54,16 @@ export function PlayerWrapper({ children }) {
 
         player.getCurrentState().then((state) => {
           if (state) setPosition(state.position);
-          !state ? setActive(false) : setActive(true);
+          // !state ? setActive(false) : setActive(true);
         });
       });
 
       player.connect();
     };
   }, []);
-  
 
   return (
-    <PlayerContext.Provider value={oplayer}>
-      {children}
-    </PlayerContext.Provider>
+    <PlayerContext.Provider value={oplayer}>{children}</PlayerContext.Provider>
   );
 }
 

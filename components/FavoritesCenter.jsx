@@ -11,7 +11,6 @@ function FavoritesCenter() {
   const playSong = async (order) => {
     console.log(topTracks);
     const playlistUris = topTracks.map((song) => song.uri);
-    
     spotifyApi.play({
       uris: playlistUris,
       offset: {

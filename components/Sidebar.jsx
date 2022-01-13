@@ -5,7 +5,7 @@ import {
   LibraryIcon,
   PlusCircleIcon,
 } from "@heroicons/react/solid";
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import useSpotify from "../hooks/useSpotify";
 import { useRecoilState } from "recoil";
 import { playlistIdState } from "../atoms/playlistAtom";

@@ -1,16 +1,16 @@
-import { ChevronDownIcon } from '@heroicons/react/outline';
-import { signOut, useSession } from 'next-auth/react'
-import React from 'react'
-import { useEffect } from 'react/cjs/react.development';
-import useSpotify from '../hooks/useSpotify';
-import Songs from './Songs';
+import { ChevronDownIcon } from "@heroicons/react/outline";
+import { signOut, useSession } from "next-auth/react";
+import React from "react";
+import { useEffect } from "react/cjs/react.development";
+import { usePlayerContext } from "../context/player";
+import useSpotify from "../hooks/useSpotify";
+import Songs from "./Songs";
 
 export default function PlaybackCenter() {
   const { data: session } = useSession();
   const spotifyApi = useSpotify();
-  useEffect( async () => {
-    console.log( await spotifyApi.getMyCurrentPlaybackState())
-  }, [spotifyApi]);
+  const player = usePlayerContext();
+  
   return (
     <div className="relative flex-grow h-screen overflow-y-scroll scrollbar-hide bg-[#141414]">
       <header className="absolute top-5 right-8">
@@ -29,5 +29,5 @@ export default function PlaybackCenter() {
       </header>
       <Songs />
     </div>
-  )
+  );
 }
