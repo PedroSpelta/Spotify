@@ -1,29 +1,51 @@
-# Next.js + Tailwind CSS Example
+# Speltify ( Spelta + Spotify )
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v2.2)](https://blog.tailwindcss.com/tailwindcss-2-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+This project is currently under development. It's a spotify clone made using their Web API to control the app and get most of the information while the Web playback SDK plays and connects to the platform.
 
-It uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-mode) for Tailwind CSS.
+The user can listen to their own playlists, search for musics and artists, listing to liked musics, top favorites musics and acess history of played ones.
+
+It uses Next.js with tailwind for front-end,
+Context and recoil for state management,
+Next-auth for authentications with jwt,
+Cheerio for scrapping lyrics,
+Some other packages for utilities.
 
 ## Preview
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+Preview the example live on [Vercel](https://spotify.spelta.dev/):
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+## Instalation and Setup Instructions
 
-## Deploy your own
+Clone down this repository. You will need node and npm installed globally on your machine.
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+Installation:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
+```
+npm install
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+Go to [Spotify Developer](https://developer.spotify.com/dashboard/applications), create a app and get both client ID and Secret.
+
+![image](https://user-images.githubusercontent.com/80366307/149500805-368e06e7-ae37-41c1-a1db-dc17f5987136.png)
+
+Create a .env.local on the projetct:
+
+```
+touch .env.local
+```
+
+Then put the data from your spotify app, an auth url, and a jwt secret of yours:
+
+![image](https://user-images.githubusercontent.com/80366307/149500685-8bd97d5c-5aaa-4a8d-b4a9-9ae3b404c9a3.png)
+
+
+
+To Start Server:
+
+```
+npm run dev
+```
+
+To Visit App:
+
+(http://localhost:3000/)
