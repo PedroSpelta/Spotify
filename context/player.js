@@ -10,6 +10,7 @@ export function PlayerWrapper({ children }) {
   const spotifyApi = useSpotify();
   const { is_paused, setPaused, setPosition } = useDataContext();
   const { setCurrentTrack } = useDataContext();
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -32,8 +33,9 @@ export function PlayerWrapper({ children }) {
         console.log("Ready with Device ID", device_id);
         const deviceIds = [device_id];
         spotifyApi.transferMyPlayback(deviceIds).then(
-          function async () {
+          function async() {
             console.log("Transfering playback to " + deviceIds);
+            setIsReady(true);
           },
           function (err) {
             console.log("Something went wrong!", err);
@@ -63,7 +65,9 @@ export function PlayerWrapper({ children }) {
   }, []);
 
   return (
-    <PlayerContext.Provider value={oplayer}>{children}</PlayerContext.Provider>
+    <PlayerContext.Provider value={{ oplayer, isReady }}>
+      {children}
+    </PlayerContext.Provider>
   );
 }
 

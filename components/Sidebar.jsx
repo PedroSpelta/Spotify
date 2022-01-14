@@ -58,7 +58,7 @@ function Sidebar() {
           <Link href={"/liked"} passHref>
             <button className="flex space-x-2 items-center hover:text-white duration-300  font-semibold">
               <HeartIcon className="h-5 w-5" />
-              <p>Músicas curtidas</p>
+              <p>Curtidas</p>
             </button>
           </Link>
 

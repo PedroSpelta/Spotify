@@ -7,23 +7,26 @@ import { usePlayerContext } from "../context/player";
 import { useDataContext } from "../context/data";
 import { FiMic } from "react-icons/fi";
 import { BiVolumeLow } from "react-icons/bi";
+import LoadingPlayback from "./LoadingPlayback";
 
 function WebPlayback() {
   const { data, setData, setShowLyrics, currentTrack, setLyrics } =
     useDataContext();
-  const player = usePlayerContext();
+  const { oplayer: player, isReady } = usePlayerContext();
   const spotifyApi = useSpotify();
 
   useEffect(async () => {
-    console.log( await spotifyApi.getMyRecentlyPlayedTracks({ limit: 20 }));
+    console.log(await spotifyApi.getMyRecentlyPlayedTracks({ limit: 20 }));
   }, []);
+
+  if (!isReady) return <LoadingPlayback />;
 
   return (
     <>
       <div className="hidden h-24 bg-[#121212] text-white md:grid grid-cols-3 text-xs md:text-base md:px-8 border-t border-[#3d3d3d]">
         <div className="flex items-center space-x-4">
           <img
-            className="hidden md:inline h-10 w-10"
+            className="hidden md:inline h-14 w-14"
             src={currentTrack?.album.images?.[0].url}
             alt=""
           />

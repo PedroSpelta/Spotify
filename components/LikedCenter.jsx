@@ -49,7 +49,7 @@ function LikedCenter() {
       </PlaylistHeader>
 
       {/* historico de musicas */}
-      <div className="flex flex-col px-16">
+      <div className="flex flex-col">
         <div className="flex flex-col teste flex-wrap">
           {likedTracks.map((track, index) => {
             return (

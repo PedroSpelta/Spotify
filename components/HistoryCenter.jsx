@@ -56,8 +56,7 @@ function HistoryCenter() {
       </PlaylistHeader>
       
       {/* historico de musicas */}
-      <div className="flex flex-col px-16">
-        <p className="text-3xl text-white teste mb-5">Histórico</p>
+      <div className="flex flex-col">
         <div className="flex flex-col teste flex-wrap">
           {recentTracks.map((track, index) => {
             return (

@@ -5,12 +5,12 @@ import { useDataContext } from "../context/data";
 
 function TimeBar({ player }) {
   const { currentTrack } = useDataContext();
-  const { duration_ms} = currentTrack;
+  const { duration_ms } = currentTrack;
   const { time, setTime, is_paused, position } = useDataContext();
 
   return (
     <>
-      <div className="flex w-full justify-center items-center gap-4">
+      <div className="w-full hidden md:flex justify-center items-center gap-4">
         <p className="text-gray-300 text-sm">
           {millisToMinutesAndSeconds(time * 1000)}
         </p>

@@ -59,9 +59,9 @@ function FavoritesCenter() {
       </PlaylistHeader>
       
       {/* Aristas mais tocados */}
-      <div className="flex flex-col px-16">
-        <p className="text-3xl text-white teste pt-20 mb-5">Artistas mais tocados</p>
-        <div className="flex items-center teste gap-5 flex-wrap">
+      <div className="flex flex-col">
+        <p className="text-3xl text-white teste mt-10 mb-5">Artistas mais tocados</p>
+        <div className="flex items-center teste gap-5 flex-wrap justify-center md:justify-start">
           {topArtists.map((artist, i) => {
             return (
               <div
@@ -82,7 +82,7 @@ function FavoritesCenter() {
       </div>
 
       {/* musicas mais tocadas */}
-      <div className="flex flex-col px-16 mt-20">
+      <div className="flex flex-col mt-10">
         <p className="text-3xl text-white teste mb-5">Músicas mais tocadas</p>
         <div className="flex flex-col teste flex-wrap">
           {topTracks.map((track, index) => {
