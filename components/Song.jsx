@@ -10,7 +10,6 @@ function Song({ track, order, onClick }) {
 
   const addToPlayback = (track) => {
     const token = spotifyApi.getAccessToken();
-    console.log(token);
     axios({
       method: "POST",
       url: `https://api.spotify.com/v1/me/player/queue?uri=${track.uri}`,

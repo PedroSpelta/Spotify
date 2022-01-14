@@ -63,7 +63,6 @@ export function DataWrapper({ children }) {
       url: "/api/lyrics",
       data: { searchTerm: searchTerm },
     }).then((res) => {
-      console.log('teste',res.data);
       const { lyric } = res.data;
       const lyricArray = getLyricArray(lyric);
       setLyrics(lyricArray);

@@ -12,7 +12,6 @@ function FavoritesCenter() {
   const [topTracks, setTopTracks] = useState([]);
   const [topArtists, setTopArtists] = useState([]);
   const playSong = async (order) => {
-    console.log(topTracks);
     const playlistUris = topTracks.map((song) => song.uri);
     spotifyApi.play({
       uris: playlistUris,

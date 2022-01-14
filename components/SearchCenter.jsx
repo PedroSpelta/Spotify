@@ -14,14 +14,12 @@ function SearchCenter() {
   const [foundArtists, setFoundArtists] = useState([]);
 
   const onClick = (track) => {
-    console.log(track);
     spotifyApi.play({
       uris: [track.uri],
     });
   };
 
   const onClickPlayback = (track) => {
-    console.log("playback add", track);
     const { uri } = track;
     const token = spotifyApi.getAccessToken();
     axios({
@@ -47,7 +45,6 @@ function SearchCenter() {
           .searchArtists(searchInput, { limit: 5 })
           .then((data) => {
             const { items } = data.body.artists;
-            console.log(items);
             setFoundArtists(items);
           })
           .catch(() => {});

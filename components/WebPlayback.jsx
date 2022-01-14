@@ -15,10 +15,6 @@ function WebPlayback() {
   const { oplayer: player, isReady } = usePlayerContext();
   const spotifyApi = useSpotify();
 
-  useEffect(async () => {
-    console.log(await spotifyApi.getMyRecentlyPlayedTracks({ limit: 20 }));
-  }, []);
-
   if (!isReady) return <LoadingPlayback />;
 
   return (
