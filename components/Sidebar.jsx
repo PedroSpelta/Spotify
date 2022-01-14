@@ -23,6 +23,8 @@ function Sidebar() {
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
       spotifyApi.getUserPlaylists().then((data) => {
+        if (playlistId === "")
+          setPlaylistId(data.body.items[0].id);
         setPlaylists(data.body.items);
       });
     }

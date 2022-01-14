@@ -26,19 +26,20 @@ function Center() {
   const [playlist, setPlaylist] = useRecoilState(playlistState);
 
   useEffect(() => {
+    if (playlistId === "") return;
     spotifyApi
       .getPlaylist(playlistId)
       .then((data) => {
         setPlaylist(data.body);
       })
       .catch((err) => console.log(err));
-
   }, [spotifyApi, playlistId]);
 
   useEffect(() => {
     setColor(shuffle(colors).pop());
   }, [playlistId]);
 
+  if (playlistId === "") return <></>;
   return (
     <div className="relative flex-grow h-screen overflow-y-scroll scrollbar-hide bg-[#141414]">
       <UserHeaderImg />
